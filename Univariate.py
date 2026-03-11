@@ -26,7 +26,8 @@ class Univariate():
     
     def Univariate(quan, dataset):
         descriptive=pd.DataFrame(index=["Mean", "Median", "Mode", "Q1:25%", "Q2:50%", 
-                                    "Q3:75%", "99%", "Q4:100%", "IQR", "1.5rule", "Lesser", "Greater", "Min", "Max"], columns=quan)
+                                    "Q3:75%", "99%", "Q4:100%", "IQR", "1.5rule", "Lesser", "Greater", "Min", "Max",
+                                       "kurtosis", "skew", "var", "std"], columns=quan)
         for columnName in quan:
             descriptive[columnName]["Mean"]=dataset[columnName].mean()
             descriptive[columnName]["Median"]=dataset[columnName].median()
@@ -42,6 +43,10 @@ class Univariate():
             descriptive[columnName]["Greater"]=descriptive[columnName]["Q3:75%"]+descriptive[columnName]["1.5rule"]
             descriptive[columnName]["Min"]=dataset[columnName].min()
             descriptive[columnName]["Max"]=dataset[columnName].max()
+            descriptive[columnName]["kurtosis"]=dataset[columnName].kurtosis()
+            descriptive[columnName]["skew"]=dataset[columnName].skew()
+            descriptive[columnName]["var"]=dataset[columnName].var()
+            descriptive[columnName]["std"]=dataset[columnName].std()
         return descriptive
 
     
